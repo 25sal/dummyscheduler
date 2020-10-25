@@ -11,7 +11,7 @@ var FormData = require('form-data');
 
 var server = "parsec2.unicampania.it";
 var BOSH_SERVICE = 'http://parsec2.unicampania.it:5280/http-bind';
-var http_post_port=10020;
+var http_post_port=10021;
 var jid="demo@parsec2.unicampania.it/actormanager";
 var passwd = "password";
 
@@ -27,7 +27,7 @@ var devices ={};
   
   
   connection = new Strophe.Connection(BOSH_SERVICE);
-  connection.rawInput = connection.rawOutput = console.log;
+  //connection.rawInput = connection.rawOutput = console.log;
   connection.connect(jid, passwd, onConnect);
   
 
@@ -66,6 +66,11 @@ function log(msg, msgid)
 			var reply = new Strophe.Builder("message",{to: from, from: to, type: 'chat'}).c("body").t(response);
 			connection.send(reply.tree());
 			console.log("SENT response:" + response);
+
+			response = "SCHEDULED";
+            var reply = new Strophe.Builder("message",{to: from, from: to, type: 'chat'}).c("body").t(response);
+            connection.send(reply.tree());
+
 		
 	  		
 		}
@@ -172,7 +177,7 @@ function log(msg, msgid)
 		method: 'POST'//,
 		//headers: {'x-test-header': 'test-header-value'}
 	  }, function(err, res) {
-		console.log(data);$.notify("EV Profile Uploaded");
+		console.log(res.statusCode);
 	    console.log("EV_PROFILE sent");
 	 	 });
               
