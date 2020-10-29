@@ -11,9 +11,9 @@ var FormData = require('form-data');
 
 var server = "parsec2.unicampania.it";
 var BOSH_SERVICE = 'http://parsec2.unicampania.it:5280/http-bind';
-var http_post_port=10021;
-var jid="demo@parsec2.unicampania.it/actormanager";
-var passwd = "password";
+var http_post_port=10020;
+var jid="uio@parsec2.unicampania.it/actormanager";
+var passwd = "gcuio01";
 
 
 var connection = null;
@@ -146,7 +146,7 @@ function log(msg, msgid)
 		var target_soc = parseInt(tokens[7]);
 		var arriv_soc = parseInt(tokens[2]);
 		var sim_time = parseInt(tokens[8]);
-               if(sim_time==dep_time){
+               if(sim_time>=dep_time){
 
 		var booked_charge = capacity*(target_soc-arriv_soc)/100;
           var available_energy= max_ch_pow_ac*(dep_time-arr_time)/3600;
